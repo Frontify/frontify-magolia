@@ -1,0 +1,8 @@
+<nodeTypes xmlns:mgnl="http://www.magnolia.info/jcr/mgnl">
+    <!-- custom node types -->
+    <nodeType name="frontifyType" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
+        <supertypes>
+            <supertype>mgnl:contentNode</supertype>
+        </supertypes>
+    </nodeType>
+</nodeTypes>

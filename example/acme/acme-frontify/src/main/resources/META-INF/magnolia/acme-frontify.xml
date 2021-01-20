@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module SYSTEM "module.dtd" >
+<module>
+  <name>acme-frontify</name>
+  <displayName>${project.name}</displayName>
+  <description>${project.description}</description>
+  <class>com.acme.frontify.FrontifyModule</class>
+  <versionHandler>com.acme.frontify.setup.FrontifyModuleVersionHandler</versionHandler>
+  <version>${project.version}</version>
+
+  <!-- For more information on module descriptor configuration options -->
+  <!-- https://documentation.magnolia-cms.com/display/DOCS/XML-based+module+descriptor -->
+
+  <dependencies>
+    <dependency>
+      <name>core</name>
+      <version>*</version>
+    </dependency>
+    <!--  Add other dependencies here, e.g the mte (magnolia templating essentials).
+    <dependency>
+      <name>mte</name>
+      <version>0.7/*</version>
+    </dependency>
+    -->
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <name>magnolia</name>
+      <workspaces>
+        <workspace>frontify-app</workspace>
+      </workspaces>
+      <nodeTypeFile>/mgnl-nodetypes/magnolia-frontify-nodetypes.xml</nodeTypeFile>
+    </repository>
+  </repositories>
+</module>

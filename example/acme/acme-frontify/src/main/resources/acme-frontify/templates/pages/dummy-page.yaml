@@ -1,0 +1,10 @@
+templateScript: /acme-frontify/templates/pages/dummy-page.ftl
+renderType: freemarker
+visible: true
+dialog: acme-frontify:pages/dummy-page-properties
+areas:
+  main:
+    renderType: freemarker
+    availableComponents:
+      dummy-component:
+        id: acme-frontify:components/dummy-component

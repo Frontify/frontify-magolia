@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #FinderWrapper iframe {
+            width:100% !important;
+            height:100vh !important;
+        }
+
+        .v-popupview-popup {
+            left: 5%;
+            top: 10%;
+            width: 90%;
+            height: 80%;
+        }
+    </style>
+</head>
+<body>
+<script src="jquery.js"></script>
+<div id="FinderWrapper"></div>
+<script type="application/javascript" src="https://cdn.frontify.com/finder/frontify-finder-latest.min.js"></script>
+<script>
+    const jcrFrontifyAssetFieldsClasses = {
+        TITLE: 'jcrFrontifyAssetTitleField',
+        DESCRIPTION: 'jcrFrontifyAssetDescriptionField',
+        NAME: 'jcrFrontifyAssetNameField',
+        WIDTH: 'jcrFrontifyAssetWidthField',
+        HEIGHT: 'jcrFrontifyAssetHeightField',
+        EXTENSION: 'jcrFrontifyAssetExtensionField',
+        CREATED: 'jcrFrontifyAssetCreatedField',
+        CREATOR_NAME: 'jcrFrontifyAssetCreatorNameField',
+        MODIFIED: 'jcrFrontifyAssetModifiedField',
+        MODIFIER_NAME: 'jcrFrontifyAssetModifierNameField',
+        DOWNLOAD_URL: 'jcrFrontifyAssetDownloadUrlField',
+        PREVIEW_URL: 'jcrFrontifyAssetPreviewUrlField',
+        MEDIA_TYPE: 'jcrFrontifyAssetMediaTypeField',
+        ID: 'jcrFrontifyAssetIdField'
+    }
+
+    FrontifyFinder.open({
+        container: document.getElementById('FinderWrapper'),
+        success: assets => {
+        for (var asset in assets) {
+        // get the popup by class
+        let popup = window.parent.document.getElementsByClassName("popupStyleNameForFrontifyLibrary")[0];
+        // get the id by class
+        let popupId = popup.getAttribute("id");
+
+        if(window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.TITLE)[0]) {
+            // get the textfield by id
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.TITLE)[0].value = assets[asset].title;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.TITLE)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.DESCRIPTION)[0].value = assets[asset].description;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.DESCRIPTION)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.NAME)[0].value = assets[asset].name;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.NAME)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.WIDTH)[0].value = assets[asset].width;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.WIDTH)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.HEIGHT)[0].value = assets[asset].height;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.HEIGHT)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.EXTENSION)[0].value = assets[asset].ext;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.EXTENSION)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.CREATED)[0].value = assets[asset].created;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.CREATED)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.CREATOR_NAME)[0].value = assets[asset].creator_name;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.CREATOR_NAME)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.MODIFIED)[0].value = assets[asset].modified;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.MODIFIED)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.MODIFIER_NAME)[0].value = assets[asset].modifier_name;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.MODIFIER_NAME)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.DOWNLOAD_URL)[0].value = assets[asset].download_url;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.DOWNLOAD_URL)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.PREVIEW_URL)[0].value = assets[asset].preview_url;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.PREVIEW_URL)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.MEDIA_TYPE)[0].value = assets[asset].media_type;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.MEDIA_TYPE)[0].dispatchEvent(new Event('change'));
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.ID)[0].value = assets[asset].id;
+            window.top.document.getElementsByClassName(jcrFrontifyAssetFieldsClasses.ID)[0].dispatchEvent(new Event('change'));
+
+            window.top.document.getElementById(popupId).value = assets[asset].generic_url;
+            window.top.document.getElementById(popupId).dispatchEvent(new Event('change'));
+        } else {
+            window.top.document.getElementById(popupId).value = JSON.stringify(assets[asset]);
+            window.top.document.getElementById(popupId).dispatchEvent(new Event('change'));
+        }
+    }
+    },
+    cancel: () => {
+        window.openObj("Selection cancelled!");
+        let popup = window.parent.document.getElementsByClassName("popupStyleNameForFrontifyLibrary")[0];
+        // get the id by class
+        let popupId = popup.getAttribute("id");
+        window.top.document.getElementById(popupId).dispatchEvent(new Event('change'));
+    },
+    error: message => {
+        console.log(`Error: ${message}`);
+    },
+    warning: message => {
+        console.log(`Warning: ${message}`);
+    },
+    settings: {
+        multiSelect: false,
+            filters: [{
+            key: 'object_type',
+            values: ['IMAGE'],
+            inverted: false,
+        },
+            {
+                key: 'ext',
+                values: ['eps', 'tif', 'ai'],
+                inverted: true,
+            }
+        ],
+            popup: {
+            title: 'My Company\'s Frontify Assets',
+                size: {
+                width: 600,
+                    height: 400,
+            },
+            position: {
+                x: 50,
+                    y: 50,
+            },
+        },
+    }
+    });
+</script>
+</body>
+</html>

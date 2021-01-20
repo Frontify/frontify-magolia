@@ -1,0 +1,4 @@
+templateScript: /acme-frontify/templates/components/dummy-component.ftl
+renderType: freemarker
+visible: true
+dialog: acme-frontify:components/dummy-component
