@@ -1,0 +1,30 @@
+form:
+  tabs:
+    - name: tabMain
+      fields:
+        - name: title
+          class: info.magnolia.ui.form.field.definition.TextFieldDefinition
+        - name: assetFrontify
+          i18n: true
+          class: info.magnolia.ui.form.field.definition.LinkFieldDefinition
+          label: Frontify Asset
+          targetWorkspace: frontify-app
+          appName: frontify-app
+          identifierToPathConverter:
+            class: info.magnolia.ui.form.field.converter.BaseIdentifierToPathConverter
+          contentPreviewDefinition:
+            contentPreviewClass: com.example.uimodule.frontify.field.FrontifyAppLinkSelector
+        - name: newFrontify
+          class: com.example.uimodule.frontify.field.definition.FrontifyFieldDefinition
+          label: "New Frontify Field"
+          targetWorkspace: frontify-app
+          appName: frontify-app
+#          identifierToPathConverter:
+#            class: info.magnolia.ui.form.field.converter.BaseIdentifierToPathConverter
+          contentPreviewDefinition:
+            contentPreviewClass: com.example.uimodule.frontify.field.FrontifyAppLinkSelector
+actions:
+  commit:
+    class: info.magnolia.ui.admincentral.dialog.action.SaveDialogActionDefinition
+  cancel:
+    class: info.magnolia.ui.admincentral.dialog.action.CancelDialogActionDefinition

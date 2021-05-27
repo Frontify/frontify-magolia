@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+  <suppress>
+    <notes>
+      <![CDATA[
+   Suppress okhttp-3.6.0.jar due to marked as DISPUTED (see https://github.com/square/okhttp/issues/4967) and won't fix by upstream (see https://github.com/okta/okta-sdk-java/pull/283/files)
+   ]]>
+    </notes>
+    <packageUrl regex="true">^pkg:maven/com\.squareup\.okhttp3/okhttp@.*$</packageUrl>
+    <cve>CVE-2018-20200</cve>
+  </suppress>
+</suppressions>

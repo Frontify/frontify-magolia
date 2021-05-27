@@ -1,0 +1,10 @@
+com/example/uimodule/setup/UiModuleVersionHandler.class
+com/example/uimodule/frontify/field/definition/FrontifyFieldDefinition.class
+com/example/uimodule/UiModule.class
+com/example/uimodule/frontify/field/utils/FrontifyUtils.class
+com/example/uimodule/frontify/FrontifyBrowserPreviewImageProvider.class
+com/example/uimodule/frontify/field/FrontifyAppLinkSelector.class
+com/example/uimodule/frontify/field/factory/FrontifyFieldFactory.class
+com/example/uimodule/frontify/field/builder/FrontifyFieldBuilder.class
+com/example/uimodule/frontify/field/models/FrontifyAsset.class
+com/example/uimodule/frontify/field/FrontifyField.class
