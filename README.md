@@ -1,4 +1,4 @@
-# Frontify-Library
+# Frontify-Library - Magnolia 5
 
 ## Creating the project
 On your local file system, create a new directory for the project, change into the directory and execute the following Maven command:
@@ -219,3 +219,8 @@ If you would like to use different property you just have to change it here:
 *${assetFrontify.**width**!"default width"}*
 
 *${assetFrontify.**height**!"default height"}*
+
+
+# Frontify-Library - Magnolia 6
+
+## Creating the project
