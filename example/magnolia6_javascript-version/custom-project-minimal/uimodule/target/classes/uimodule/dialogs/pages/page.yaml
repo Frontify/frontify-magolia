@@ -1,0 +1,10 @@
+form:
+  implementationClass: info.magnolia.ui.javascript.form.FormViewWithChangeListener
+  properties:
+    frontifyField:
+      label: Frontify field
+      $type: javascriptField
+      fieldScript: /uimodule/webresources/frontify-lib/frontifyField.html
+      styleName: popupStyleNameForFrontifyLibrary
+      height: 340
+      defaultValue: /.resources/uimodule/webresources/frontify-lib/img/placeholder.jpg

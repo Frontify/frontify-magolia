@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #imgInput {
+        height: 300px;
+        display: block;
+      }
+      #input {
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="imgInput" src="" alt="">
+    <input id="input" type="text" />
+    <button id="clickMeBtn" onclick="callOutside()">Select New Frontify Asset</button>
+    <script>
+      // CHANGE: Your Module Name
+      var MODULE_NAME = "uimodule";
+      window.top.document.body.querySelector(".popupStyleNameForFrontifyLibrary").style = "height: 340px";
+      window.top.document.body.querySelector(".popupStyleNameForFrontifyLibrary").querySelector(".field-iframe").style = "height: 340px !important";
+      var locationPath = location.protocol + "//" + location.host;
+      if(!window.top.document.getElementById("FinderWrapper")) {
+          var finderWrapperContainer = document.createElement('div');
+          finderWrapperContainer.id = "FinderWrapper";
+          finderWrapperContainer.style = "width:1000px !important; display: none; height:600px !important;position: absolute;z-index: 9999999;top: 0; left: calc(50% - 500px);display: none;";
+          finderWrapperContainer.addEventListener("openFrontify", function(e) {
+              var windowParent = e.detail;
+                  if(windowParent && !windowParent.document.getElementById("frontifyInternalLibraryScript")) {
+                      addInternalElement(windowParent, locationPath, false);
+                  } else {
+                      addInternalElement(windowParent, locationPath, true);
+                  }
+          });
+          window.top.document.body.appendChild(finderWrapperContainer);
+      }
+
+      if(!window.top.document.getElementById("frontifyExternalLibraryScript")) {
+          addExternalElement()
+      }
+
+      function addExternalElement() {
+          var domElement = document.createElement('script');
+          domElement.id = "frontifyExternalLibraryScript";
+          domElement.setAttribute("src", "https://cdn.frontify.com/finder/frontify-finder-latest.min.js");
+          window.top.document.body.appendChild(domElement);
+      }
+      
+      function addInternalElement(windowParent, locationPath, isAlreadyAdded) {
+          if(isAlreadyAdded) {
+              var oldElement = windowParent.document.getElementById("frontifyInternalLibraryScript");
+              oldElement.remove();
+          }
+          var domElement = document.createElement('script');
+          domElement.id = "frontifyInternalLibraryScript";
+          var location = locationPath + "/.resources/" + MODULE_NAME + "/webresources/frontify-lib/js/frontify.js";
+          domElement.setAttribute("src", location);
+          windowParent.document.body.appendChild(domElement);
+      }
+
+      function callOutside() {
+          var finderWrapper = window.top.document.getElementById('FinderWrapper');
+          var event = new CustomEvent("openFrontify", { "detail": window.top });
+          finderWrapper.dispatchEvent(event);
+      }
+
+      let input = document.getElementById('input');
+      let imgInput = document.getElementById('imgInput');
+      let correlationId;
+
+      input.addEventListener('change', function () {
+        parent.window.postMessage({ action: 'changeValue', correlationId, value: input.value }, '*');
+      });
+
+      window.addEventListener(
+        'message',
+        function (event) {
+            setTimeout(function() {
+                if (event.data.action === 'init') {
+                    correlationId = event.data.correlationId;
+                    input.value = event.data.state.value || event.data.state.defaultValue || '';
+                    imgInput.src = input.value;
+                }
+            }, 500);
+        },
+        false
+      );
+    </script>
+  </body>
+</html>

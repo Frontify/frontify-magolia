@@ -1,0 +1,4 @@
+title: uimodule
+dialog: uimodule:pages/page
+templateScript: /uimodule/templates/pages/page.ftl
+renderType: freemarker
