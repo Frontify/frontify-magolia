@@ -264,3 +264,18 @@ mvn archetype:generate -DarchetypeGroupId=info.magnolia.maven.archetypes -Darche
 ```
 Values:
 ![Screenshot](docs/values.png)
+
+Generated files and folders:
+```
+my-ui-components/
+├── pom.xml
+└── src
+    ├── main
+    │ ├── java
+    │ └── resources
+    └── test
+        ├── java
+        └── resources
+```
+Now add the dependency for the magnolia UI framework (core) module.
+__**my-ui-components/pom.xml (fragment)**__
