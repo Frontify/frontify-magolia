@@ -241,8 +241,8 @@ Confirm the configuration by entering **Y**.
 
 The Maven archetype script creates this webapp skeleton:
 ```
-custom-dx-core-project
-├── custom-dx-core-project-webapp
+custom-project-minimal
+├── custom-project-minimal-webapp
 │ ├── pom.xml - The webapp POM
 │ └── src
 └── pom.xml - The parent POM
