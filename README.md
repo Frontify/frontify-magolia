@@ -373,7 +373,7 @@ form:
     frontifyField:
       label: Frontify field
       $type: javascriptField
-      fieldScript: /uimodule/webresources/frontify-lib/frontifyField.html
+      fieldScript: /my-ui-components/webresources/frontify-lib/frontifyField.html
       styleName: popupStyleNameForFrontifyLibrary
       height: 340
       defaultValue: /.resources/my-ui-components/webresources/frontify-lib/img/placeholder.jpg
