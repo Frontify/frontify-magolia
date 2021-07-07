@@ -263,4 +263,4 @@ In the project directory, issue the following command:
 mvn archetype:generate -DarchetypeGroupId=info.magnolia.maven.archetypes -DarchetypeArtifactId=magnolia-module-archetype -DarchetypeVersion=RELEASE
 ```
 Values:
-![Screenshot](docs/docroot.png)
+![Screenshot](docs/values.png)
