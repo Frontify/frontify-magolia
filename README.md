@@ -1,4 +1,4 @@
-# Frontify-Library
+# Frontify-Library - Magnolia 5
 
 ## Creating the project
 On your local file system, create a new directory for the project, change into the directory and execute the following Maven command:
@@ -219,3 +219,48 @@ If you would like to use different property you just have to change it here:
 *${assetFrontify.**width**!"default width"}*
 
 *${assetFrontify.**height**!"default height"}*
+
+
+# Frontify-Library - Magnolia 6
+
+## Creating the project
+On your local file system, create a new directory for the project, change into the directory and execute the following Maven command:
+```
+mvn archetype:generate -DarchetypeGroupId=info.magnolia.maven.archetypes -DarchetypeArtifactId=magnolia-project-archetype -DarchetypeVersion=RELEASE
+```
+When prompted to supply values for archetype parameters, enter the following **Use values that fit your requirements.**:
+```
+groupId: com.example
+artifactId: custom-dx-core-project
+version: 1.0-SNAPSHOT
+package: com.example
+magnolia-bundle-version: 6.2
+project-name: custom-dx-core-project
+```
+Confirm the configuration by entering **Y**.
+
+The Maven archetype script creates this webapp skeleton:
+```
+custom-dx-core-project
+├── custom-dx-core-project-webapp
+│ ├── pom.xml - The webapp POM
+│ └── src
+└── pom.xml - The parent POM
+```
+Editing the parent POM:
+```
+1. In the dependencyManagement section, remove the Option A.
+2. Uncomment the Option B.
+<!-- Option B -->
+<!-- If you want to use the DX CORE. -->
+```
+Editing the webapp POM:
+1. Remove the commented option ii and option iii. Keep the option i, which imports the empty webapp.
+
+## Creating a custom Magnolia Maven module
+In the project directory, issue the following command:
+```
+mvn archetype:generate -DarchetypeGroupId=info.magnolia.maven.archetypes -DarchetypeArtifactId=magnolia-module-archetype -DarchetypeVersion=RELEASE
+```
+Values:
+![Screenshot](docs/values.png)
