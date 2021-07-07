@@ -231,11 +231,11 @@ mvn archetype:generate -DarchetypeGroupId=info.magnolia.maven.archetypes -Darche
 When prompted to supply values for archetype parameters, enter the following **Use values that fit your requirements.**:
 ```
 groupId: com.example
-artifactId: custom-dx-core-project
+artifactId: custom-project-minimal
 version: 1.0-SNAPSHOT
 package: com.example
 magnolia-bundle-version: 6.2
-project-name: custom-dx-core-project
+project-name: custom-project-minimal
 ```
 Confirm the configuration by entering **Y**.
 
