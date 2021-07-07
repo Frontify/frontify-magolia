@@ -263,6 +263,7 @@ In the project directory, issue the following command:
 mvn archetype:generate -DarchetypeGroupId=info.magnolia.maven.archetypes -DarchetypeArtifactId=magnolia-module-archetype -DarchetypeVersion=RELEASE
 ```
 Values:
+
 ![Screenshot](docs/values.png)
 
 Generated files and folders:
@@ -278,4 +279,134 @@ my-ui-components/
         └── resources
 ```
 Now add the dependency for the magnolia UI framework (core) module.
-__**my-ui-components/pom.xml (fragment)**__
+
+**my-ui-components/pom.xml (fragment)**
+```
+  <dependencies>
+    <dependency>
+      <groupId>info.magnolia</groupId>
+      <artifactId>magnolia-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>info.magnolia.ui</groupId>
+      <artifactId>magnolia-ui-framework</artifactId>
+    </dependency>
+  </dependencies>
+```
+Runtime dependencies in the module descriptor:
+**src/main/resources/META-INF/magnolia/my-ui-components.xml**
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module SYSTEM "module.dtd" >
+<module>
+  <name>my-ui-components</name>
+  <displayName>${project.name}</displayName>
+  <description>${project.description}</description>
+  <class>info.magnolia.documentation.newui.MyUiModule</class>
+  <versionHandler>info.magnolia.documentation.newui.setup.MyUiModuleVersionHandler</versionHandler>
+  <version>${project.version}</version>
+  <dependencies>
+    <dependency>
+      <name>core</name>
+      <version>6.0/*</version>
+    </dependency>
+    <dependency>
+      <name>ui-framework-core</name>
+      <version>6.0/*</version>
+    </dependency>
+  </dependencies>
+</module>
+```
+### Adding the custom module to a custom webapp via Maven
+Parent POM (fragment):
+```
+  <dependencyManagement>
+    <dependencies>
+   <!-- you may have
+           many more sections here -->
+      <!-- new entry for the new module -->
+      <dependency>
+        <groupId>info.magnolia.documentation</groupId>
+        <artifactId>my-ui-components</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+```
+Webapp POM (fragment)
+```
+  <dependencies>
+  <!-- you may have many more sections here -->
+
+  <!-- new entry for the new module -->
+    <dependency>
+      <groupId>info.magnolia.documentation</groupId>
+      <artifactId>my-ui-components</artifactId>
+    </dependency>
+  </dependencies>
+```
+### Install dependency
+Installation
+```
+<dependency>
+  <groupId>info.magnolia.ui</groupId>
+  <artifactId>magnolia-ui-framework-javascript</artifactId>
+  <version>${ui-framework-javascript.version}</version>
+</dependency>
+```
+Versions: 
+1.1.3 = Magnolia 6.2
+```
+<dependency>
+  <groupId>info.magnolia.ui</groupId>
+  <artifactId>magnolia-ui-framework-javascript</artifactId>
+  <version>1.1.3</version>
+</dependency>
+```
+Configuration
+Add a JavaScript field in your dialog definition as follows:
+```
+label: Home Page
+form:
+  implementationClass: info.magnolia.ui.javascript.form.FormViewWithChangeListener
+  properties:
+    frontifyField:
+      label: Frontify field
+      $type: javascriptField
+      fieldScript: /uimodule/webresources/frontify-lib/frontifyField.html
+      styleName: popupStyleNameForFrontifyLibrary
+      height: 340
+      defaultValue: /.resources/my-ui-components/webresources/frontify-lib/img/placeholder.jpg
+
+```
+Don't forget to set the correct path for your custom module!
+
+Properties:
+```
+ $type: Needs to be javascriptField
+ fieldScript: Points to a valid HTML file located in any module (Maven & Light modules)
+ height: The height of the field in the dialog
+ defaultValue: The field default value
+ parameters: Allows passing custom parameters to the Javascript field
+```
+
+### Don't forget to set your `defaultBaseUrl` in the `/server@defaultBaseUrl` configuration.
+
+This is how you print your asset in your .ftl file:
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    [@cms.page /]
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  </head>
+  <body>
+    <h1>Frontify field example</h1>
+    [#assign frontifyField = content.frontifyField!]
+    <b>Frontify Field:</b> <br />
+    <img style="width: 500px;" src="${frontifyField}" alt="" />
+  </body>
+</html>
+
+```
