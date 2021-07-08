@@ -234,7 +234,7 @@ groupId: com.example
 artifactId: custom-project-minimal
 version: 1.0-SNAPSHOT
 package: com.example
-magnolia-bundle-version: 6.2
+magnolia-bundle-version: 6.2.9
 project-name: custom-project-minimal
 ```
 Confirm the configuration by entering **Y**.
