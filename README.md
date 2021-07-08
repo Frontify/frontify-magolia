@@ -412,7 +412,7 @@ This is how you print your asset in your .ftl file:
 ```
 ### In your webresources folder add the library files from:
 ```
-https://github.com/Frontify/magnolia/tree/master/library/magnolia6/frontify-lib
+https://github.com/Frontify/magnolia/tree/master/library/magnolia6/frontify-lib.zip
 ```
 
 In frontifyField.html change the variable with the name of your module
