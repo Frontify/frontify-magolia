@@ -355,7 +355,7 @@ Installation
 </dependency>
 ```
 Versions: 
-1.1.3 = Magnolia 6.2
+1.1.3 = Magnolia 6.2.9
 ```
 <dependency>
   <groupId>info.magnolia.ui</groupId>
