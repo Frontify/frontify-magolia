@@ -2,31 +2,95 @@
 <html>
   <head>
     <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+
       #imgInput {
         height: 300px;
         display: block;
+        margin: 0 auto;
       }
       #input {
-        width: 200px;
+        width: 496px;
+      }
+
+      .frontify-image-container {
+        background-color: #f5f5f5;
+      }
+
+      .frontify-input-field {
+        border: 1px solid transparent;
+        background-color: #f5f5f5;
+        color: #232323;
+        min-height: 45px;
+        padding: 0 8px 0 8px;
+        margin-top: 8px;
+        -webkit-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -ms-transition: 0.5s;
+        -o-transition: 0.5s;
+        transition: 0.5s;
+      }
+
+      .frontify-input-field:hover {
+        -webkit-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -ms-transition: 0.5s;
+        -o-transition: 0.5s;
+        transition: 0.5s;
+        border: 1px solid #dbdbdb;
+      }
+
+      .frontify-button {
+        color: #fff;
+        background-color: #232323;
+        border: 0 transparent;
+        height: 48px;
+        line-height: normal;
+        transition: background-position 0.5s, color 0.5s;
+        font-size: 14px;
+        font-weight: normal;
+        letter-spacing: -0.3px;
+        padding: 0 20px;
+        margin-top: 8px;
+        margin-left: -3px;
+        margin-right: 0;
+        -webkit-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -ms-transition: 0.5s;
+        -o-transition: 0.5s;
+        transition: 0.5s;
+      }
+
+      .frontify-button:hover {
+        -webkit-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -ms-transition: 0.5s;
+        -o-transition: 0.5s;
+        transition: 0.5s;
+        background-color: #656565;
       }
     </style>
   </head>
   <body>
-    <img id="imgInput" src="" alt="">
-    <input id="input" type="text" />
-    <button id="clickMeBtn" onclick="callOutside()">Select New Frontify Asset</button>
+    <div class="frontify-image-container"><img id="imgInput" src="" alt=""></div>
+    <input class="frontify-input-field" id="input" type="text" />
+    <button class="frontify-button" id="clickMeBtn" onclick="callOutside()">Choose Frontify Asset</button>
     <script>
       // CHANGE: Your Module Name
-      var MODULE_NAME = "uimodule";
-      window.top.document.body.querySelector(".popupStyleNameForFrontifyLibrary").style = "height: 340px";
-      window.top.document.body.querySelector(".popupStyleNameForFrontifyLibrary").querySelector(".field-iframe").style = "height: 340px !important";
-      var locationPath = location.protocol + "//" + location.host;
+      const MODULE_NAME = "uimodule";
+      const FRONTIFY_LIBRARY_URL = "https://cdn.frontify.com/finder/frontify-finder-latest.min.js";
+      window.top.document.body.querySelector(".popupStyleNameForFrontifyLibrary").style = "height: 360px";
+      window.top.document.body.querySelector(".popupStyleNameForFrontifyLibrary").querySelector(".field-iframe").style = "height: 360px !important";
+      const locationPath = location.protocol + "//" + location.host;
       if(!window.top.document.getElementById("FinderWrapper")) {
-          var finderWrapperContainer = document.createElement('div');
+          const finderWrapperContainer = document.createElement('div');
           finderWrapperContainer.id = "FinderWrapper";
           finderWrapperContainer.style = "width:1000px !important; display: none; height:600px !important;position: absolute;z-index: 9999999;top: 0; left: calc(50% - 500px);display: none;";
           finderWrapperContainer.addEventListener("openFrontify", function(e) {
-              var windowParent = e.detail;
+              const windowParent = e.detail;
                   if(windowParent && !windowParent.document.getElementById("frontifyInternalLibraryScript")) {
                       addInternalElement(windowParent, locationPath, false);
                   } else {
@@ -41,27 +105,27 @@
       }
 
       function addExternalElement() {
-          var domElement = document.createElement('script');
+          const domElement = document.createElement('script');
           domElement.id = "frontifyExternalLibraryScript";
-          domElement.setAttribute("src", "https://cdn.frontify.com/finder/frontify-finder-latest.min.js");
+          domElement.setAttribute("src", FRONTIFY_LIBRARY_URL);
           window.top.document.body.appendChild(domElement);
       }
       
       function addInternalElement(windowParent, locationPath, isAlreadyAdded) {
           if(isAlreadyAdded) {
-              var oldElement = windowParent.document.getElementById("frontifyInternalLibraryScript");
+              const oldElement = windowParent.document.getElementById("frontifyInternalLibraryScript");
               oldElement.remove();
           }
-          var domElement = document.createElement('script');
+          const domElement = document.createElement('script');
           domElement.id = "frontifyInternalLibraryScript";
-          var location = locationPath + "/.resources/" + MODULE_NAME + "/webresources/frontify-lib/js/frontify.js";
+          const location = locationPath + "/.resources/" + MODULE_NAME + "/webresources/frontify-lib/js/frontify.js";
           domElement.setAttribute("src", location);
           windowParent.document.body.appendChild(domElement);
       }
 
       function callOutside() {
-          var finderWrapper = window.top.document.getElementById('FinderWrapper');
-          var event = new CustomEvent("openFrontify", { "detail": window.top });
+          const finderWrapper = window.top.document.getElementById('FinderWrapper');
+          const event = new CustomEvent("openFrontify", { "detail": window.top });
           finderWrapper.dispatchEvent(event);
       }
 

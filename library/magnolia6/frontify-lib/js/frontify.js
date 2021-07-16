@@ -1,19 +1,19 @@
 (function myFunction() {
-    var container = document.getElementById('FinderWrapper');
+    let container = document.getElementById('FinderWrapper');
     FrontifyFinder.open({
         container: container,
         success: assets => {
-        for (var asset in assets) {
-        // get the iframe by class
-        let iframeContainer = window.document.getElementsByClassName("popupStyleNameForFrontifyLibrary")[0];
-        let iframe = iframeContainer.getElementsByClassName("field-iframe")[0];
-        var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-        // get the id by class
-        let input = innerDoc.getElementById("input");
-        let imgInput = innerDoc.getElementById("imgInput");
-        input.value = assets[asset].generic_url;
-        imgInput.src = assets[asset].generic_url;
-        input.dispatchEvent(new Event('change'))
+        for (let asset in assets) {
+            // get the iframe by class
+            let iframeContainer = window.document.getElementsByClassName("popupStyleNameForFrontifyLibrary")[0];
+            let iframe = iframeContainer.getElementsByClassName("field-iframe")[0];
+            let innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+            // get the id by class
+            let input = innerDoc.getElementById("input");
+            let imgInput = innerDoc.getElementById("imgInput");
+            input.value = assets[asset].generic_url;
+            imgInput.src = assets[asset].generic_url;
+            input.dispatchEvent(new Event('change'))
     }
 },
     cancel: () => {
